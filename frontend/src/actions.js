@@ -1,11 +1,11 @@
 import alt from './alt';
 import SuperAgent from 'superagent';
 
-class HelloActions {
+class Actions {
     constructor(){
 
     }
 
 }
 
-export default alt.createActions(HelloActions);
+export default alt.createActions(Actions);

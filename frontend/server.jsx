@@ -1,23 +1,27 @@
 import Express from 'express';
+import BodyParser from 'body-parser';
 import React from 'react';
-import ReactDOM from 'react-dom/server';
-import Hello from './src/components/hello';
 import alt from './src/alt';
 import Iso from 'iso';
+import {Routes} from './src/routes';
+import Router from 'react-router';
 
 let app = Express();
 
-app.post('/', (req, res) => {
-    console.log(req);
+app.use(BodyParser.json());
+
+
+app.get('/', (req, res) => {
+
     alt.bootstrap(JSON.stringify({
-      HelloStore: {
-          name: 'bear'
-      }
+      Store: JSON.parse(req.query.data)
     }));
     let iso = new Iso();
-    let htmlStr = ReactDOM.renderToString(<Hello />);
-    iso.add(htmlStr, alt.flush());
-    res.send(iso.render());
+    Router.run( Routes, `/${req.query.reacturl}`, function (Handler) {
+        let htmlStr = React.renderToString(<Handler />);
+        iso.add(htmlStr, alt.flush());
+        res.send(iso.render());
+    });
 });
 
 let server = app.listen(3000, () => {

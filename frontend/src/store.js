@@ -1,12 +1,22 @@
 import alt from './alt';
 import actions from './actions';
 
-class HelloStore {
+class Store {
     constructor(){
         this.state = {
-            name: ''
+            info: {
+                name: '',
+                age: '',
+                career: ''
+            },
+            about: '',
+            contact: {
+                address: '',
+                phone: '',
+                email: ''
+            }
         }
     }
 }
 
-export default alt.createStore(HelloStore, 'HelloStore')
+export default alt.createStore(Store, 'Store')

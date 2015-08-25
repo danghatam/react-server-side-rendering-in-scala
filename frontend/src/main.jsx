@@ -1,12 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Hello from './components/hello';
 import alt from './alt';
 import Iso from 'iso';
+import Router, {HistoryLocation} from 'react-router';
+import router from './routes';
 
-window.onload = function(){
-    Iso.bootstrap(function (state, meta, container) {
-        alt.bootstrap(state);
-        ReactDOM.render(<Hello />, container);
+Iso.bootstrap(function (state, meta, container) {
+    alt.bootstrap(state);
+    router.run(function (Handler) {
+        var node = React.createElement(Handler);
+        React.render(node, container);
     });
-}
+});

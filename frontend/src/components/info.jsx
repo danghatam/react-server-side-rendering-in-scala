@@ -4,13 +4,10 @@ import Actions from '../actions';
 import connectToStores from 'alt/utils/connectToStores';
 
 @connectToStores
-class Hello extends Component {
+class Info extends Component {
 
     constructor(){
         super();
-        //this.state = {
-        //    time: new Date().toString()
-        //};
     }
     static getStores() {
         return [Store];
@@ -20,21 +17,15 @@ class Hello extends Component {
         return Store.getState();
     }
 
-    getTime(){
-        console.log("click me baby");
-        //this.setState({
-        //    time: new Date().toString()
-        //});
-    }
-
     render(){
         return(
             <div>
-                <h1>Hello {this.props.name}</h1>
-                <button onClick={this.getTime.bind(this)}>What time?</button>
+                <h1>Name: {this.props.info.name}</h1>
+                <p><b>Age: </b> {this.props.info.age}</p>
+                <p><b>Career: </b> {this.props.info.career}</p>
             </div>
         );
     };
 }
 
-export default Hello;
+export default Info;
